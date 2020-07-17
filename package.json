@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy:firebase": "ng build --prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -15,10 +16,16 @@
     "@angular/common": "~9.1.9",
     "@angular/compiler": "~9.1.9",
     "@angular/core": "~9.1.9",
+    "@angular/fire": "^6.0.2",
     "@angular/forms": "~9.1.9",
+    "@angular/localize": "~9.1.9",
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "@auth0/angular-jwt": "^5.0.1",
+    "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "bootstrap": "^4.5.0",
+    "firebase": "^7.16.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
