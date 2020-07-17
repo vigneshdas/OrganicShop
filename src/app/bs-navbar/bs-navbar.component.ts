@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
-
+import { Component} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { LoginAuthService } from '../services/login-auth.service';
 
 @Component({
   selector: 'bs-navbar',
@@ -11,22 +10,19 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BsNavbarComponent{
 
-  user :  any;
+  user$ :  Observable<any>;
   closeResult = '';
 
-  constructor(private afAuth : AngularFireAuth , private modalService: NgbModal) { 
-    afAuth.authState.subscribe( authRes =>{
-        this.user= (authRes) ? authRes :  null;
-    })
+  constructor(private loginAuth:LoginAuthService , private modalService: NgbModal ) { 
+    this.user$ = loginAuth.user$;
   }
 
   login(){
-    this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider);
+    this.loginAuth.login();
   }
 
   logout(){
-    console.log("Logout Called")
-    this.afAuth.signOut();
+    this.loginAuth.logout();
   }
 
 
