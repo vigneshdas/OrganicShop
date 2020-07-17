@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { AccessDeniendComponent } from './access-deniend/access-deniend.component';
+import { AuthGurdService } from './services/auth-gurd.service';
 
 
 const routes: Routes = [
@@ -16,11 +18,13 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"products",component:ProductsComponent},
   {path:"shopping-cart",component:ShoppingCartComponent},
-  {path:"check-out",component:CheckOutComponent},
-  {path:"order-success",component:OrderSuccessfulComponent},
-  {path:"myOrders", component:MyOrdersComponent},
+  {path:"check-out",component:CheckOutComponent ,canActivate :[AuthGurdService]},
+  {path:"order-success",component:OrderSuccessfulComponent,canActivate :[AuthGurdService]},
+  {path:"myOrders", component:MyOrdersComponent,canActivate :[AuthGurdService]},
   {path:"admin/products",component:AdminProductsComponent},
-  {path:"admin/orders",component:AdminOrdersComponent}
+  {path:"admin/orders",component:AdminOrdersComponent},
+  {path:"**",component:AccessDeniendComponent}
+
 ];
 
 @NgModule({
