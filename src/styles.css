@@ -12,3 +12,13 @@
 .dropdown{
     cursor: pointer;
 }
+
+.cursorPointer{
+    cursor: pointer; 
+}
+
+.img-circle{
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+}
