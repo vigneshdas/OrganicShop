@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable ,of } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router, ActivatedRoute } from '@angular/router';
+import { AppUser } from '../model/app-user';
+import { switchMap } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +14,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginAuthService {
 
   user$ :  Observable<firebase.User>;
+  uId : String;
 
-  constructor(private afAuth : AngularFireAuth , private router: Router , private route :ActivatedRoute ) { 
-    /**afAuth.authState.subscribe( authRes =>{
-        this.user = (authRes) ? authRes :  null;
-    })**/
+  constructor(
+    private afAuth : AngularFireAuth , 
+    private router: Router , 
+    private route :ActivatedRoute , 
+    private userServ : UserService 
+  ) { 
+   
     this.user$ = afAuth.authState;
   }
 
@@ -31,26 +38,16 @@ export class LoginAuthService {
     this.afAuth.signOut();
   }
 
+  get appUser$() : Observable <AppUser>{
+    return this.user$
+      .pipe(
+        switchMap ( user =>{
+            if(user) 
+              return this.userServ.getDataById(user.uid);
+            return of(null);
 
-  isLoggedIn(){
-    
-    const helper = new JwtHelperService();
-    let token = localStorage.getItem('token');
-    console.log("token=="+token)
-    if(!token) return false;
-
-    const decodedToken = helper.decodeToken(token);
-    console.log("decodedToken=="+decodedToken)
-    const expirationDate = helper.getTokenExpirationDate(token);
-    console.log("expirationDate=="+expirationDate)
-    const isExpired = helper.isTokenExpired(token);
-    console.log("isExpired=="+isExpired)
-
-    return !isExpired;
+        })
+      )
   }
-
-  getAuthUserDetail(){
-    let token = localStorage.getItem('token');
-    return new JwtHelperService().decodeToken(token);
-  }
+  
 }

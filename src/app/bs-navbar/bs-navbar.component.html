@@ -15,13 +15,13 @@
           </li>
         </ng-template>
 
-        <li ngbDropdown *ngIf="user$ | async as user; else anonymousUser" class="nav-item dropdown d-flex flex-row-reverse">
+        <li ngbDropdown *ngIf="appUser$ | async as user; else anonymousUser" class="nav-item dropdown d-flex flex-row-reverse">
             <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ user.displayName}}
+            {{ user.name}}
             </a>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" routerLink="/myOrders">My Orders</a>
-              <ng-container *ngIf="true">
+              <ng-container *ngIf="user.isAdmin">
                 <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
                 <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
               </ng-container>

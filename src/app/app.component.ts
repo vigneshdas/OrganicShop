@@ -18,7 +18,7 @@ export class AppComponent {
           userServ.save(user);
           
           let returnUrl = localStorage.getItem('returnUrl');
-          router.navigate([returnUrl || '/'])
+          router.navigate([returnUrl != 'null' ? returnUrl : '/']);
         }
     })
   }

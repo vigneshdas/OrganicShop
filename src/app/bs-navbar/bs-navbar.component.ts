@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { LoginAuthService } from '../services/login-auth.service';
+import { AppUser } from '../model/app-user';
 
 
 @Component({
@@ -12,10 +13,13 @@ import { LoginAuthService } from '../services/login-auth.service';
 export class BsNavbarComponent{
 
   user$ :  Observable<firebase.User>;
+  appUser$ : Observable<AppUser>;
   closeResult = '';
 
   constructor(private loginAuth:LoginAuthService , private modalService: NgbModal  ) { 
     this.user$ = loginAuth.user$;
+    this.appUser$ = loginAuth.appUser$
+            
   }
 
   login(){
