@@ -12,6 +12,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AccessDeniendComponent } from './access-deniend/access-deniend.component';
 import { AuthGurdService } from './services/auth-gurd.service';
 import { AdminAuthGurdService } from './services/admin-auth-gurd.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
   {path:"check-out",component:CheckOutComponent ,canActivate :[AuthGurdService]},
   {path:"order-success",component:OrderSuccessfulComponent,canActivate :[AuthGurdService]},
   {path:"myOrders", component:MyOrdersComponent,canActivate :[AuthGurdService]},
+  {path:"admin/products/new/:responseMsg",component:ProductFormComponent,canActivate :[AuthGurdService,AdminAuthGurdService]},
+  {path:"admin/products/new",component:ProductFormComponent,canActivate :[AuthGurdService,AdminAuthGurdService]},
   {path:"admin/products",component:AdminProductsComponent,canActivate :[AuthGurdService,AdminAuthGurdService]},
   {path:"admin/orders",component:AdminOrdersComponent,canActivate :[AuthGurdService,AdminAuthGurdService]},
   {path:"**",component:AccessDeniendComponent}

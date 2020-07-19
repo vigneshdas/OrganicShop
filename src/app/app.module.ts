@@ -21,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccessDeniendComponent } from './access-deniend/access-deniend.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    AccessDeniendComponent
+    AccessDeniendComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-   
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
