@@ -1,56 +1,82 @@
-<form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input 
-            ngModel
-            required
-            id="title" 
-            name="title" 
-            type="text" 
-            class="form-control form-control-sm" 
-            placeholder="title"
-            #title="ngModel" >
-
-        <div class="alert alert-danger" *ngIf="title.touched && !title.valid">
-            <div *ngIf="title.errors.required"> Enter title</div>
-        </div> 
-    </div>
-    <div class="form-group">
-        <label for="price">price</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-inr"></i></span>
+<div class="row">
+    <div class="col-md-6">
+        <form (ngSubmit)="saveOrUpdate(form.value)" #form="ngForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input 
+                    [(ngModel)] = "product.title"
+                    required
+                    id="title" 
+                    name="title" 
+                    type="text" 
+                    class="form-control form-control-sm" 
+                    placeholder="title"
+                    #title="ngModel" >
+        
+                <div class="alert alert-danger" *ngIf="title.touched && !title.valid">
+                    <div *ngIf="title.errors.required"> Enter title</div>
+                </div> 
             </div>
-            <input 
-                ngModel
-                required
-                id="price" 
-                name="price" 
-                type="number" 
-                class="form-control form-control-sm" 
-                placeholder="price"
-                #price="ngModel">  
-            <div class="alert alert-danger" *ngIf="price.touched && !price.valid">
-                <div *ngIf="price.errors.required"> Enter price</div>
-            </div>  
-        </div>     
+            <div class="form-group">
+                <label for="price">price</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-inr"></i></span>
+                    </div>
+                    <input 
+                        [(ngModel)] = "product.price"
+                        required
+                        id="price" 
+                        name="price" 
+                        type="number" 
+                        class="form-control form-control-sm" 
+                        placeholder="price"
+                        #price="ngModel">  
+                    <div class="alert alert-danger" *ngIf="price.touched && !price.valid">
+                        <div *ngIf="price.errors.required"> Enter price</div>
+                    </div>  
+                </div>     
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select  
+                    [(ngModel)] = "product.category"
+                    id="category" name="category" 
+                    class="form-control form-control-sm" 
+                    required 
+                    #category="ngModel">
+                    <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
+                    <div *ngIf="price.errors.required"> Select category</div>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">Img Url</label>
+                <input 
+                    [(ngModel)] = "product.imageUrl"
+                    required 
+                    id="imageUrl" 
+                    name="imageUrl" 
+                    type="text" 
+                    class="form-control form-control-sm" 
+                    placeholder="Image Url" 
+                    #imageUrl="ngModel">
+                <div class="alert alert-danger" *ngIf="imageUrl.touched && !imageUrl.valid">
+                    <div *ngIf="imageUrl.errors.required"> Enter imageUrl</div>
+                </div>
+            </div>
+              <button type="submit" class="btn btn-success" [disabled]="!form.form.valid">Submit</button>
+              <button class="btn btn-primary" (click)="back()">Back</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="category">Category</label>
-        <select  id="category" name="category" class="form-control form-control-sm" ngModel required #category="ngModel">
-            <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
-        </select>
-        <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
-            <div *ngIf="price.errors.required"> Select category</div>
-        </div> 
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img [src]="product.imageUrl" class="card-img-top" alt="">
+            <div class="card-body">
+              <h4 class="card-title">{{product.title}}</h4>
+              <p class="card-text">{{product.price  | currency:'INR'}}</p>
+            </div>
+          </div>
     </div>
-    <div class="form-group">
-        <label for="imageUrl">Img Url</label>
-        <input ngModel required id="imageUrl" name="imageUrl" type="text" 
-            class="form-control form-control-sm" placeholder="Image Url" #imageUrl="ngModel">
-        <div class="alert alert-danger" *ngIf="imageUrl.touched && !imageUrl.valid">
-            <div *ngIf="imageUrl.errors.required"> Enter imageUrl</div>
-        </div>
-    </div>
-      <button type="submit" class="btn btn-success" [disabled]="!form.form.valid">Submit</button>
-</form>
+</div>

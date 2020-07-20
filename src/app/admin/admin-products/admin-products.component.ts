@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from 'src/app/services/products.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-products',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit {
 
-  constructor() { }
+  msg = null;
 
-  ngOnInit(): void {
+  products$ : Observable<any>;
+
+  constructor(private route : ActivatedRoute, private poductService : ProductsService) {
+    this.products$ = this.getAllProduct();
+    
   }
 
+  ngOnInit(): void {
+    this.msg =  this.route.snapshot.queryParamMap.get('responseMsg');  
+    this.products$ = this.getAllProduct();
+  }
+
+  getAllProduct(){
+    console.log();
+    return this.poductService.getAllProduct();;
+  }
+
+  deletproduct(productId){
+    this.poductService.deletproduct(productId)
+    .subscribe(resData=>{
+      console.log("deletproduct=="+resData)
+      this.msg = "Deleted successfully";
+      this.getAllProduct();
+    })
+  }
+     
 }
