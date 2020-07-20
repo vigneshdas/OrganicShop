@@ -7,6 +7,9 @@
         <strong>Success!</strong> {{msg}}.
     </div>
     <a class="btn btn-primary" routerLink='/admin/products/new'>New Product</a>
+    <p>
+      <input #query (keyup)="search(query.value)"type="text" class="form-control">
+    </p>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -19,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of products$ | async; index as i ">
+        <tr *ngFor="let product of filteredproducts ; index as i ">
           <th scope="row">{{ i+1}}</th>
           <td>
             {{ product.title }}

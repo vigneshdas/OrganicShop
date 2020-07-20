@@ -35,7 +35,6 @@ export class ProductsService {
             for(const key in resdata){
               tempData.push({...resdata[key] , id:key});
             }
-            console.log("getAllProduct=="+tempData)
             return tempData;  
         })
       )
