@@ -7,8 +7,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
-import { DataTableModule } from 'angular-4-data-table';
-
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -48,7 +46,6 @@ import { PaginationComponent } from './core/pagination/pagination.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    DataTableModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

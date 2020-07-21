@@ -23,11 +23,9 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(private route : ActivatedRoute, private poductService : ProductsService) {
      this.getAllProduct();
-     
-     //this.refreshCountries();
   }
 
-  refreshproductPagibation() {
+  refreshproductPagination() {
     console.log("refreshproductPagibation Called")
     this.filteredproducts = this.products
       .map((product, i) => ({id: i + 1, ...product}))
@@ -40,34 +38,21 @@ export class AdminProductsComponent implements OnInit {
   }
 
   getAllProduct(){
-    console.log();
     return this.poductService.getAllProduct()
       .subscribe (resData =>{
           this.products = resData;
           this.filteredproducts =  this.products;
           this.collectionSize = this.filteredproducts.length;
-          this.refreshproductPagibation();
+          this.refreshproductPagination();
       })
   }
 
   deletproduct(productId){
     this.poductService.deletproduct(productId)
     .subscribe(resData=>{
-      console.log("deletproduct=="+resData)
       this.msg = "Deleted successfully";
       this.getAllProduct();
     })
-  }
-
-  filter(query){
-    this.filteredproducts = 
-    (query) ? this.products.
-        filter(p => {
-          console.log(p.title)
-          p.title.toLowerCase().includes(query.toLowerCase)
-        
-        }) 
-     : this.products;
   }
 
   search(text: string)  {

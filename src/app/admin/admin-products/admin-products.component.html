@@ -1,14 +1,12 @@
 <div class="container">
-    
-    <div class="card" style="width: 100%;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Gudalur_Banner.jpg" class="img-fluid" alt="Responsive image">
-    </div>
     <div *ngIf = "msg" class="alert alert-success">
         <strong>Success!</strong> {{msg}}.
     </div>
-    <a class="btn btn-primary" routerLink='/admin/products/new'>New Product</a>
     <p>
-      <input #query (keyup)="search(query.value)"type="text" class="form-control">
+      <a class="btn btn-success btn-sm" routerLink='/admin/products/new'>New Product</a>
+    </p>
+    <p>
+      <input #query (keyup)="search(query.value)"type="text" class="form-control" placeholder="Search text">
     </p>
     <table class="table table-striped">
         <thead>
@@ -27,31 +25,32 @@
           <td>
             {{ product.title }}
           </td>
-          <td>{{ product.price | number}}</td>
+          <td>{{ product.price | currency:'INR'}}</td>
           <td>{{ product.category}}</td>
           <td>
               <a [routerLink]="['/admin/products/',product.id]">   
-                <span class="glyphicon glyphicon-edit"></span>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a>
           </td>
           <td>
-            <a (click)="deletproduct(product.id)">
-              <span class="glyphicon glyphicon-remove"></span>
-          </a>
+            <a class="cursorPointer" (click)="deletproduct(product.id)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
          </td>
         </tr>
         </tbody>
       </table>  
       
-      <div class="d-flex justify-content-between p-2">
-        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshproductPagibation()">
+      <div class=" container d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshproductPagination()">
+          
         </ngb-pagination>
-      
-        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshproductPagibation()">
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshproductPagination()">
           <option [ngValue]="2">2 items per page</option>
           <option [ngValue]="4">4 items per page</option>
           <option [ngValue]="6">6 items per page</option>
         </select>
       </div>
+      
 </div>
 

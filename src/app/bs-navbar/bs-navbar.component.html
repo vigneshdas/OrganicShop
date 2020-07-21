@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm  bg-light fixed-top navbar-light">
+<nav class="navbar navbar-expand-sm  nav-background fixed-top navbar-light">
     <a class="nav-brand" >O</a>
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
@@ -6,10 +6,14 @@
             <a class="nav-link" routerLink='/'>Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink='/shopping-cart'>Shopping Cart</a>
+            <a class="nav-link" routerLink='/shopping-cart'>
+              <i class="fa fa-shopping-cart" aria-hidden="true">  
+              </i>
+              <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+            </a>   
         </li>
         <ng-template #anonymousUser>
-          <li  class="nav-item">
+          <li  class="nav-item cursorPointer">
             <!-- <a class="nav-link" routerLink='/login'>Login</a> -->
             <a class="nav-link" (click)="open(content)">Login</a>
           </li>
@@ -29,6 +33,10 @@
             </div>
           </li>         
     </ul>
+    <div class="">
+      <i class="fa fa-shopping-cart" aria-hidden="true">  
+      </i>
+    </div>
 </nav>
 
 <ng-template #content let-modal>

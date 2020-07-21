@@ -23,6 +23,7 @@ export class BsNavbarComponent{
   }
 
   login(){
+    console.log("Login Called");
     this.loginAuth.login();
   }
 
@@ -38,6 +39,7 @@ export class BsNavbarComponent{
    */
 
   open(content) {
+    console.log("Open method Called=="+content)
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
