@@ -7,6 +7,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
+import { DataTableModule } from 'angular-4-data-table';
+
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -23,6 +25,7 @@ import { AccessDeniendComponent } from './access-deniend/access-deniend.componen
 import { HttpClientModule } from '@angular/common/http';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
+import { PaginationComponent } from './core/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +41,14 @@ import { CategoryService } from './services/category.service';
     AdminOrdersComponent,
     LoginComponent,
     AccessDeniendComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    DataTableModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

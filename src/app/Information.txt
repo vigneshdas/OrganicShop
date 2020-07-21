@@ -1,0 +1,3 @@
+***Used Angular 4 Data table for pagination sorting 
+
+npm install angular-4-data-table --save

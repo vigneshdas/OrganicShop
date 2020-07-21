@@ -16,9 +16,22 @@ export class AdminProductsComponent implements OnInit {
   products : Array<AdminProduct>;
   filteredproducts : Array<AdminProduct>;
 
+
+  page = 1;
+  pageSize = 4;
+  collectionSize = 0;
+
   constructor(private route : ActivatedRoute, private poductService : ProductsService) {
      this.getAllProduct();
-    
+     
+     //this.refreshCountries();
+  }
+
+  refreshproductPagibation() {
+    console.log("refreshproductPagibation Called")
+    this.filteredproducts = this.products
+      .map((product, i) => ({id: i + 1, ...product}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   ngOnInit(): void {
@@ -32,6 +45,8 @@ export class AdminProductsComponent implements OnInit {
       .subscribe (resData =>{
           this.products = resData;
           this.filteredproducts =  this.products;
+          this.collectionSize = this.filteredproducts.length;
+          this.refreshproductPagibation();
       })
   }
 
