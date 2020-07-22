@@ -17,9 +17,7 @@ export class CategoryService {
             for(const key in resData){
               tempData.push({...resData[key] , id : key});
             }
-            console.log("Http Call for Category fetch=="+tempData)
             return tempData;
-
         })
       )    
   }
