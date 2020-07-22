@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
 import { PaginationComponent } from './core/pagination/pagination.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PaginationComponent } from './core/pagination/pagination.component';
     LoginComponent,
     AccessDeniendComponent,
     ProductFormComponent,
-    PaginationComponent
+    PaginationComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,66 +1,11 @@
-<!-- <p>home works!</p>
-
-<div class="lessons-list" *ngIf="testData.length > 0 else loading">
-  
-</div>
-  
-<ng-template #loading>
-    <div>Loading...</div>
-</ng-template> -->
 <div class="container">
-    
-    <div class="row row-offcanvas row-offcanvas-right">
-        <div  class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-            <div  class="list-group">
-              <a class="list-group-item list-group-item-action"
-                routerLink='/'
-                [class.active] = "!categoryId"
-              >All Category</a>
-              <ng-container *ngIf="categories && categories.length > 0; else categoryLoading" >
-                <!-- <ng-container *ngFor="let cat of categories"> 
-                    <a (click)="getProductBtCategory(cat.id)" class="list-group-item">{{cat.name}}</a>
-                </ng-container> -->
-                <a *ngFor="let cat of categories" 
-                    routerLink='/'
-                    [queryParams] = "{category : cat.id}" 
-                    class="list-group-item list-group-item-action "
-                    [class.active]="categoryId === cat.id"
-                    >
-                    {{cat.name}}
-                </a>
-              </ng-container>
-              <ng-template #categoryLoading>
-                <div class="d-flex align-items-center">
-                    <div class="spinner-grow" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
-              </ng-template>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-9">
-            <div  class="row">
-                <ng-container *ngIf="products && products.length > 0; else loadingProducts ">
-                    <ng-container *ngFor="let product of filteredProduct"> 
-                        <div class="card" style="width: 18rem;">
-                            <img [src]="product.imageUrl" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{product.title}}</h5>
-                                <h5 class="card-text">{{product.price  | currency:'INR'}}</h5>
-                                
-                            </div>
-                            <button class="btn btn-success btn-sm">Add to Cart</button>
-                        </div>
-                    </ng-container>
-                </ng-container>
-                <ng-template #loadingProducts> 
-                    <div class="d-flex align-items-center">
-                      <div class="spinner-grow" role="status">
-                        <span class="sr-only">Loading...</span>
-                      </div>
-                    </div>
-                </ng-template>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-3">
+      <category [categoryId]='categoryId'></category>
+    </div>
+    <div class="col">
+      <products [filteredProduct]='filteredProduct'></products>
     </div>
   </div>
+</div>
+
