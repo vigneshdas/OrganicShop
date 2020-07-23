@@ -25,6 +25,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './services/category.service';
 import { PaginationComponent } from './core/pagination/pagination.component';
 import { CategoryComponent } from './category/category.component';
+import { ProductCartComponent } from './reusable-components/product-cart/product-cart.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CategoryComponent } from './category/category.component';
     AccessDeniendComponent,
     ProductFormComponent,
     PaginationComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductCartComponent
   ],
   imports: [
     BrowserModule,

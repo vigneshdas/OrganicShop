@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { AdminProduct } from '../model/admin-product';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   products : Array<AdminProduct>;
   filteredProduct: Array<AdminProduct>;
@@ -18,10 +18,6 @@ export class HomeComponent implements OnInit {
   
   constructor( private poductService : ProductsService, private route : ActivatedRoute ) {
     this.getAllProduct();
-  }
-
-  ngOnInit(): void {
-    
   }
 
   getAllProduct(){

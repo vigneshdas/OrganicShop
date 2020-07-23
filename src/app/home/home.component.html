@@ -4,7 +4,21 @@
       <category [categoryId]='categoryId'></category>
     </div>
     <div class="col">
-      <products [filteredProduct]='filteredProduct'></products>
+      <div  class="row">
+        <ng-container *ngIf="filteredProduct && filteredProduct.length > 0; else loadingProducts ">
+            <ng-container *ngFor="let product of filteredProduct"> 
+              <product-card [product]='product'></product-card>
+            </ng-container>
+        </ng-container>
+        <ng-template #loadingProducts> 
+            <div class="d-flex align-items-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+        </ng-template>
+      </div>
+     
     </div>
   </div>
 </div>

@@ -13,7 +13,13 @@
 .nav-background{
     background-color: #FDA12A ;
 }
-
+.list-group-item.active{
+    z-index: 2;
+    color: #fff;
+    background-color: #28a745 !important;;
+    border-color: #28a745 !important;;
+    
+}
 #lblCartCount {
     font-size: 12px;
     background:#1e7e34;

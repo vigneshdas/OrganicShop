@@ -8,8 +8,6 @@ import { AdminProduct } from '../model/admin-product';
 })
 export class ProductsComponent implements OnInit {
 
-  @Input('filteredProduct') filteredProduct: Array<AdminProduct>;
-
   constructor() { }
 
   ngOnInit(): void {
