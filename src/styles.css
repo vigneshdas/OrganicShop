@@ -3,11 +3,8 @@
 /**@import "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css";**/
 @import "~font-awesome/css/font-awesome.min.css";
 
-.body{
-    padding: 50px;  
-}
 .container{
-    padding: 50px;
+    padding: 20px;
 }
 
 .nav-background{

@@ -1,26 +1,25 @@
-<div  class="list-group">
-    <a class="list-group-item list-group-item-action"
-    routerLink='/'
-    [class.active] = "!categoryId"
-    >All Category</a>
-    <ng-container *ngIf="categories && categories.length > 0; else categoryLoading" >
-    <!-- <ng-container *ngFor="let cat of categories"> 
-        <a (click)="getProductBtCategory(cat.id)" class="list-group-item">{{cat.name}}</a>
-    </ng-container> -->
-    <a *ngFor="let cat of categories" 
+<div class="sticky-top">
+    <div  class="list-group">
+        <a class="list-group-item list-group-item-action"
         routerLink='/'
-        [queryParams] = "{category : cat.id}" 
-        class="list-group-item list-group-item-action "
-        [class.active]="categoryId === cat.id"
-        >
-        {{cat.name}}
-    </a>
-    </ng-container>
-    <ng-template #categoryLoading>
-        <div class="d-flex align-items-center">
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-        </div>
-    </ng-template>
+        [class.active] = "!categoryId"
+        >All Category</a>
+        <ng-container *ngIf="categories && categories.length > 0; else categoryLoading" >
+            <a *ngFor="let cat of categories" 
+                routerLink='/'
+                [queryParams] = "{category : cat.id}" 
+                class="list-group-item list-group-item-action "
+                [class.active]="categoryId === cat.id"
+                >
+                {{cat.name}}
+            </a>
+        </ng-container>
+        <ng-template #categoryLoading>
+            <div class="mx-auto">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>
