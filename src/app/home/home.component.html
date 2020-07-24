@@ -6,8 +6,11 @@
     <div class="col">
       <div  class="row">
         <ng-container *ngIf="filteredProduct && filteredProduct.length > 0; else loadingProducts ">
-            <ng-container *ngFor="let product of filteredProduct"> 
-              <product-card [product]='product'></product-card>
+            <ng-container *ngFor="let product of filteredProduct; let i=index"> 
+              <div class="col">
+                <product-card [product]='product'></product-card>
+              </div>
+              <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
             </ng-container>
         </ng-container>
         <ng-template #loadingProducts> 
@@ -21,4 +24,13 @@
     </div>
   </div>
 </div>
+
+<!-- <div class="row" *ngIf="cart$ | async as cart">
+  <ng-container *ngFor="let p of filteredProducts; let i = index">
+    <div class="col">
+      <product-card [product]="p" [shopping-cart]="cart"></product-card>
+    </div>
+    <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+  </ng-container>
+</div> -->
 
