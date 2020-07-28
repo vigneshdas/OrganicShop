@@ -13,7 +13,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ShoppingCartService {
 
   data = 1;
-  public shopingCart = new BehaviorSubject(this.data);
+  public shopingCartTotalItem = new BehaviorSubject(this.data);
+  public CartTotalItem = new BehaviorSubject(this.data);
 
   constructor(private http : HttpClient) { }
 
@@ -65,6 +66,7 @@ export class ShoppingCartService {
       this.http.put(this.url+"shoppingCart/"+cartId+"/items/"+product.id+".json",{product: product , quantity : quantity})
       .subscribe(resData=>{
          this.getTotalItemInCart();
+         this.getItems();
       },
       error => {  
         console.log("updateProduct Error===="+error);                            
@@ -85,6 +87,13 @@ export class ShoppingCartService {
       return this.http.get(this.url+"shoppingCart/"+cartId+".json");  
   }
 
+  getItems(){
+    this.getShoppingItems()
+      .subscribe((resData: any) => {
+        this.CartTotalItem.next(resData);
+    });
+  }
+
   getTotalItemInCart(){
     //sample data in Cart  
     this.getShoppingItems()
@@ -94,7 +103,7 @@ export class ShoppingCartService {
           totalItem += CartData.items[productId].quantity;
         }
         console.log("totalItem=="+totalItem);
-        this.shopingCart.next(totalItem);
+        this.shopingCartTotalItem.next(totalItem);
       })  
   }
 }

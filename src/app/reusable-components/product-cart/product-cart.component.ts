@@ -15,18 +15,25 @@ export class ProductCartComponent implements OnInit {
 
   @Output('quantChangeEvent') quantChangeEvent = new EventEmitter();
 
-  shopingItemResponse = true;
+  shopingItemResponse = false;
 
   constructor(private cartService : ShoppingCartService) { 
   }
 
   ngOnInit(): void {
-   
+    this.cartService.CartTotalItem
+      .subscribe(data =>{
+        console.log("BehaviorSubject working===="+data);
+        if(this.shopingItemResponse) {
+          this.shoppingCart = data;
+          this.getQuantity();
+        }
+      })
   }
 
   addToCart(){
     this.cartService.createCart(this.product); 
-    this.getShoppingItems();
+    this.shopingItemResponse = true;
   }
   
   getQuantity(){
@@ -36,11 +43,10 @@ export class ProductCartComponent implements OnInit {
     return (item) ? item.quantity : 0;
   }
 
-  getShoppingItems(){
+ /**  getShoppingItems(){
     this.cartService.getShoppingItems()
       .subscribe((resData: any) => {
-        this.shoppingCart = resData;
-        this.getQuantity(); 
+
     });
-  }
+  }**/
 }

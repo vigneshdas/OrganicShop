@@ -25,7 +25,7 @@ export class BsNavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.cartService.shopingCart
+    this.cartService.shopingCartTotalItem
       .subscribe(data =>{
         console.log("BehaviorSubject working===="+data);
         this.totalCartItem = data;
