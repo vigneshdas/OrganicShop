@@ -21,13 +21,13 @@ export class BsNavbarComponent implements OnInit{
   constructor(private loginAuth:LoginAuthService , private modalService: NgbModal ,private cartService : ShoppingCartService ) { 
     this.user$ = loginAuth.user$;
     this.appUser$ = loginAuth.appUser$
-            
+    
+    cartService.getTotalItemInCart();
   }
 
   ngOnInit(): void {
     this.cartService.shopingCartTotalItem
       .subscribe(data =>{
-        console.log("BehaviorSubject working===="+data);
         this.totalCartItem = data;
       })
   }

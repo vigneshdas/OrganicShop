@@ -23,7 +23,6 @@ export class ProductCartComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.CartTotalItem
       .subscribe(data =>{
-        console.log("BehaviorSubject working===="+data);
         if(this.shopingItemResponse) {
           this.shoppingCart = data;
           this.getQuantity();
