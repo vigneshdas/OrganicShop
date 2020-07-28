@@ -1,8 +1,9 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { LoginAuthService } from '../services/login-auth.service';
 import { AppUser } from '../model/app-user';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 
 @Component({
@@ -10,16 +11,25 @@ import { AppUser } from '../model/app-user';
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent{
+export class BsNavbarComponent implements OnInit{
 
   user$ :  Observable<firebase.User>;
   appUser$ : Observable<AppUser>;
   closeResult = '';
+  totalCartItem;
 
-  constructor(private loginAuth:LoginAuthService , private modalService: NgbModal  ) { 
+  constructor(private loginAuth:LoginAuthService , private modalService: NgbModal ,private cartService : ShoppingCartService ) { 
     this.user$ = loginAuth.user$;
     this.appUser$ = loginAuth.appUser$
             
+  }
+
+  ngOnInit(): void {
+    this.cartService.shopingCart
+      .subscribe(data =>{
+        console.log("BehaviorSubject working===="+data);
+        this.totalCartItem = data;
+      })
   }
 
   login(){

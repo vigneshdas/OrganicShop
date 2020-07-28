@@ -4,12 +4,16 @@ import { AdminProduct } from '../model/admin-product';
 import { Items } from '../model/items';
 import { cart } from '../model/cart';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ShoppingCartService {
+
+  data = 1;
+  public shopingCart = new BehaviorSubject(this.data);
 
   constructor(private http : HttpClient) { }
 
@@ -23,12 +27,12 @@ export class ShoppingCartService {
     if(this.cartId)
        return this.updateOrSaveProduct(product,this.cartId);
         
-     this.createCartAndSaveProduct(product);   
+     return this.createCartAndSaveProduct(product);   
   }
 
   createCartAndSaveProduct(product : AdminProduct){
     console.log("createCartAndSaveProduct() Called")
-    this.http.post(this.url+"shoppingCart.json", 
+    return this.http.post(this.url+"shoppingCart.json", 
     {'createdDate' : new Date(), 
       'items' :{
           [product.id] :{
@@ -46,7 +50,7 @@ export class ShoppingCartService {
 
   updateOrSaveProduct(product : AdminProduct, cartId ){
     console.log("updateOrSaveProduct() Called")
-    this.http.get(this.url+"shoppingCart/"+cartId+"/items/"+product.id+".json")
+    return this.http.get(this.url+"shoppingCart/"+cartId+"/items/"+product.id+".json")
       .subscribe((resData : Items) =>{
         if(resData){ //Product already exists in cart
           console.log("Product already exists in cart=="+product.id)
@@ -60,7 +64,7 @@ export class ShoppingCartService {
   updateProduct(product : AdminProduct, cartId , quantity){
       this.http.put(this.url+"shoppingCart/"+cartId+"/items/"+product.id+".json",{product: product , quantity : quantity})
       .subscribe(resData=>{
-         console.log("updateProduct===="+resData);
+         this.getTotalItemInCart();
       },
       error => {  
         console.log("updateProduct Error===="+error);                            
@@ -79,5 +83,18 @@ export class ShoppingCartService {
   getShoppingItems(){
       let cartId = this.getCartIdFromLocalStorage();
       return this.http.get(this.url+"shoppingCart/"+cartId+".json");  
+  }
+
+  getTotalItemInCart(){
+    //sample data in Cart  
+    this.getShoppingItems()
+      .subscribe((CartData : any) =>{
+        let totalItem = 0;
+        for(const productId in CartData.items){
+          totalItem += CartData.items[productId].quantity;
+        }
+        console.log("totalItem=="+totalItem);
+        this.shopingCart.next(totalItem);
+      })  
   }
 }
